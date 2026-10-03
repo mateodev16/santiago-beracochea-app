@@ -46,6 +46,17 @@ Set `PUBLIC_API_URL` in production when the API does not share an origin with th
 
 It is inlined into the client bundle at **build** time, so on a static deploy it has to be set on the build, not just at runtime. Missing it leaves `BASE = '/api'`, which 404s against a static host instead of reaching the API.
 
+## Deploy
+
+The site and the API live on **different origins**, so every call is cross-origin:
+
+- **Vercel** serves the static Astro output (`santiago-beracochea-app.vercel.app`). There are no serverless functions and no rewrite, so Vercel answers `404 text/plain` for any `/api/*` request.
+- **Render** serves the Express API (`npm start`, which also serves `dist/` when it exists).
+
+`PUBLIC_API_URL` **must** be set in the Vercel project's environment variables (all environments) or the build inlines `""`, `BASE` stays `/api`, and login/registro/catalog fail with `Respuesta inesperada del servidor (404)`. The symptom to recognise: Vercel replies 404 on `/api/*` while `/login` returns 200 HTML.
+
+`CORS_ORIGIN` on Render must include the site origin (it defaults to reflecting any origin, so cross-origin calls work without it).
+
 ## Routes
 
 | Route | Rendering |

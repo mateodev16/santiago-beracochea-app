@@ -297,13 +297,6 @@ export default function AuthPanel({ mode }: Props) {
         </button>
       </form>
 
-      {mode === 'login' && (
-        <div className="mt-5 rounded-xl border border-sb-blue/10 bg-sb-cream px-4 py-3">
-          <p className="text-[11px] text-slate-400">Acceso administrador</p>
-          <p className="text-xs text-sb-muted">admin@sb.com.uy · admin123</p>
-        </div>
-      )}
-
       <p className="mt-6 text-center text-[13px] text-slate-400">
         {mode === 'login' ? '¿No tenés cuenta?' : '¿Ya tenés cuenta?'}{' '}
         <a

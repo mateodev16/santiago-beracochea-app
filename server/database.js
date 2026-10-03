@@ -97,6 +97,14 @@ create table if not exists order_items (
   qty integer not null check (qty > 0)
 );
 
+create table if not exists product_images (
+  id uuid primary key default gen_random_uuid(),
+  mime text not null,
+  size integer not null,
+  data bytea not null,
+  created_at timestamptz not null default now()
+);
+
 create index if not exists users_email_idx on users (email);
 create index if not exists products_category_idx on products (category);
 create index if not exists products_active_idx on products (active);

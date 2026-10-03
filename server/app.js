@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { config } from './config.js'
 import authRoutes from './routes/auth.routes.js'
+import imageRoutes from './routes/images.routes.js'
 import productRoutes from './routes/products.routes.js'
 import orderRoutes from './routes/orders.routes.js'
 import metricsRoutes from './routes/metrics.routes.js'
@@ -24,6 +25,7 @@ export const createApp = () => {
   )
 
   app.use('/api/auth', authRoutes)
+  app.use('/api/images', imageRoutes)
   app.use('/api/products', productRoutes)
   app.use('/api/orders', orderRoutes)
   app.use('/api/metrics', metricsRoutes)

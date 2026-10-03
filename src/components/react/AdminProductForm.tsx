@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { api } from '../../lib/api'
 import { ApiError, createProduct, saveProduct, useProducts } from '../../lib/store'
 import { CATEGORIES, type Product } from '../../data/products'
 
@@ -6,15 +7,6 @@ interface Props {
   product?: Product | null
   onDone?: () => void
 }
-
-const IMAGE_OPTIONS = [
-  '/images/products/fleischmann.png',
-  '/images/products/adria.png',
-  '/images/products/prix.png',
-  '/images/products/sucralight.png',
-  '/images/products/prime.png',
-  'https://placehold.co/600x600/E5E7EB/1A2480?text=Imagen+URL',
-]
 
 const inputClass =
   'w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-sb-blue'
@@ -40,7 +32,7 @@ const toForm = (product?: Product | null): FormState => ({
   price: product ? String(product.price) : '',
   unit: product?.unit ?? '',
   stock: product ? String(product.stock) : '',
-  image: product?.image ?? IMAGE_OPTIONS[0],
+  image: product?.image ?? '',
   badge: product?.badge ?? '',
 })
 
@@ -50,12 +42,31 @@ export default function AdminProductForm({ product = null, onDone }: Props) {
   const [error, setError] = useState('')
   const [saved, setSaved] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   const categories = [...new Set([...CATEGORIES, ...products.map((p) => p.category)])]
 
   const update = (key: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }))
     setSaved(false)
+  }
+
+  const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+
+    setError('')
+    setUploading(true)
+    try {
+      const { image } = await api.images.upload(file)
+      setForm((prev) => ({ ...prev, image: image.url }))
+      setSaved(false)
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'No pudimos subir la imagen')
+    } finally {
+      setUploading(false)
+    }
   }
 
   const submit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
@@ -232,43 +243,42 @@ export default function AdminProductForm({ product = null, onDone }: Props) {
           </select>
         </div>
 
-        <div className="sm:col-span-2">
-          <label className={labelClass} htmlFor="product-image">
+<div className="sm:col-span-2">
+          <label className={labelClass} htmlFor="product-image-file">
             Imagen
           </label>
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <img
-                src={form.image}
-                alt="Vista previa"
-                className="h-20 w-20 rounded-xl bg-sb-cream object-contain p-2"
-                onError={(event) => {
-                  const target = event.currentTarget as HTMLImageElement
-                  if (!target.dataset.fallback) {
-                    target.dataset.fallback = 'true'
-                    target.src = '/images/products/prix.png'
-                  }
-                }}
-              />
+              {form.image ? (
+                <img
+                  src={form.image}
+                  alt="Vista previa"
+                  className="h-20 w-20 rounded-xl bg-sb-cream object-contain p-2"
+                />
+              ) : (
+                <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-sb-cream text-center text-[10px] font-semibold text-sb-muted">
+                  Sin imagen
+                </div>
+              )}
               <div className="flex w-full flex-col gap-2">
-                <select
-                  id="product-image"
-                  className={inputClass}
-                  value={IMAGE_OPTIONS.includes(form.image) ? form.image : ''}
-                  onChange={(event) => update('image', event.target.value)}
-                >
-                  <option value="">URL personalizada</option>
-                  {IMAGE_OPTIONS.map((option) => (
-                    <option key={option} value={option}>
-                      {option.split('/').pop()}
-                    </option>
-                  ))}
-                </select>
+                <input
+                  id="product-image-file"
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/avif"
+                  disabled={uploading}
+                  onChange={handleFile}
+                  className="block w-full text-sm text-sb-muted disabled:opacity-60 file:mr-3 file:rounded-xl file:border-0 file:bg-sb-blue file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white hover:file:bg-sb-blue-deeper"
+                />
                 <input
                   className={inputClass}
                   placeholder="https://... o /images/products/..."
-                  value={IMAGE_OPTIONS.includes(form.image) ? '' : form.image}
+                  value={form.image}
                   onChange={(event) => update('image', event.target.value)}
                 />
+                <p className="text-xs text-sb-muted">
+                  {uploading
+                    ? 'Subiendo imagen...'
+                    : 'Subí un archivo (PNG, JPEG, WebP o AVIF, hasta 2 MB) o pegá una URL.'}
+                </p>
               </div>
             </div>
         </div>

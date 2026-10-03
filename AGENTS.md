@@ -28,7 +28,21 @@ Both dev scripts rely on env vars, so they must keep the `--env-file=.env` flag.
 - `src/components/Header.astro`, `src/components/Footer.astro` - site chrome
 - `src/components/react/` - React islands (`ProductCard`, `ProductFilters`, `CatalogExplorer`, `ShoppingCart`, `QuantitySelector`, `CheckoutForm`, `OrderHistory`, `AdminProductForm`, `AdminProductTable`, `AdminOrders`, `AdminPanel`, `AuthPanel`, `ProfilePanel`, `ProductPurchase`, `HeaderControls`, `NavLinks`, `AuthGuard`, `StoreHydrator`)
 - `server/` - Express API: `database.js` (pool + DDL), `repositories/`, `routes/`, `mappers.js`, `seed.js`
+- `server/routes/images.routes.js` - image upload/serve, see [Product images](#product-images)
 - `public/images/` - brand logo, hero image and product photos
+
+## Product images
+
+Product photos can be uploaded from the admin panel (`/admin` → Productos) and are stored in **PostgreSQL**, not on disk: `product_images (id uuid, mime, size, data bytea)`, created idempotently by the `SCHEMA` block in `server/database.js`. `products.image` stores the URL returned by the upload.
+
+- `POST /api/images` - `requireAdmin` + `multer.memoryStorage()`, 2 MB cap (`IMAGE_MAX_BYTES`), field name `file`
+- `GET /api/images/:id` - **public on purpose**: `<img src>` cannot send the bearer token, so requiring auth would break every product image. Served with `Cache-Control: immutable`
+
+The MIME check is done on the **magic bytes** (`server/utils/images.js`), not the `Content-Type` header, since the client controls that header.
+
+Images uploaded by an admin cannot live in `public/`: the Astro build is static, so that folder is baked into `dist/` at build time and any runtime write is lost on the next deploy.
+
+Set `PUBLIC_API_URL` in production when the API does not share an origin with the site. It is read by both `src/lib/api.ts` and `server/config.js`, so the stored URL is absolute and `<img src>` resolves.
 
 ## Routes
 
@@ -55,7 +69,7 @@ Admin credentials: `admin@sb.com.uy` / `admin123`.
 
 ## Database
 
-PostgreSQL 18, database `sb_store`, role `sb_app`; credentials live in `.env` (`DATABASE_URL`) and must never be committed. Tables: `users`, `products`, `orders`, `order_items`. The schema is created idempotently on API startup. `server/data/db.json` is the pre-migration backup and is no longer read at runtime.
+PostgreSQL 18, database `sb_store`, role `sb_app`; credentials live in `.env` (`DATABASE_URL`) and must never be committed. Tables: `users`, `products`, `orders`, `order_items`, `product_images`. The schema is created idempotently on API startup. `server/data/db.json` is the pre-migration backup and is no longer read at runtime.
 
 ## Gotchas
 

@@ -23,6 +23,8 @@ export const config = {
   freeShippingThreshold: 800,
   shippingCost: 150,
   bcryptRounds: Number(process.env.BCRYPT_ROUNDS ?? 10),
+  publicApiUrl: (process.env.PUBLIC_API_URL ?? '').replace(/\/+$/, ''),
+  imageMaxBytes: Number(process.env.IMAGE_MAX_BYTES ?? 2 * 1024 * 1024),
   serveStatic: process.env.SERVE_STATIC !== 'false',
   distDir: toPath('../dist/'),
 }

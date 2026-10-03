@@ -1,6 +1,7 @@
 import { ZodError } from 'zod'
 import { ApiError } from './errors.js'
 import { config, isProduction } from '../config.js'
+import { formatBytes } from './images.js'
 
 const fieldErrors = (error) =>
   Object.fromEntries(error.issues.map((issue) => [issue.path.join('.') || '_', issue.message]))
@@ -29,6 +30,17 @@ export const errorHandler = (error, req, res, next) => {
 
   if (error?.type === 'entity.parse.failed') {
     return res.status(400).json({ error: 'Error', message: 'El cuerpo del request no es JSON válido' })
+  }
+
+  if (error?.code === 'LIMIT_FILE_SIZE') {
+    return res.status(413).json({
+      error: 'Error',
+      message: `La imagen supera el máximo de ${formatBytes(config.imageMaxBytes)}`,
+    })
+  }
+
+  if (error?.code === 'LIMIT_UNEXPECTED_FILE') {
+    return res.status(400).json({ error: 'Error', message: 'Subí la imagen en el campo "file"' })
   }
 
   console.error('[api] error no controlado:', error)

@@ -71,8 +71,44 @@ export interface ListResponse<T> {
   total: number
 }
 
+export interface UploadedImage {
+  id: string
+  url: string
+  mime: string
+  size: number
+}
+
+// Va aparte de `request` porque el browser tiene que poner el boundary del
+// multipart; si fijamos Content-Type a mano la request queda mal formada.
+async function uploadFile(path: string, file: File): Promise<{ image: UploadedImage }> {
+  const token = getToken()
+  const body = new FormData()
+  body.append('file', file)
+
+  let response: Response
+  try {
+    response = await fetch(`${BASE}${path}`, {
+      method: 'POST',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      body,
+    })
+  } catch {
+    throw new ApiError(0, 'No pudimos subir la imagen. Revisá tu conexión.')
+  }
+
+  const payload = await response.json().catch(() => null)
+  if (!response.ok) {
+    throw new ApiError(response.status, payload?.message ?? 'No pudimos subir la imagen')
+  }
+  return payload as { image: UploadedImage }
+}
+
 export const api = {
   health: () => request<{ status: string }>('/health'),
+
+  images: {
+    upload: (file: File) => uploadFile('/images', file),
+  },
 
   auth: {
     register: (payload: {

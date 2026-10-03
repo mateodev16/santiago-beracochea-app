@@ -39,7 +39,7 @@ const bootstrap = async () => {
     if (seeded.created) {
       console.log(`  datos iniciales cargados desde el catálogo (${seeded.products} productos)`)
     }
-    console.log(`  admin: ${config.adminEmail} / ${config.adminPassword}`)
+    console.log(`  admin: ${config.adminEmail}`)
     console.log('')
   })
 }

@@ -22,6 +22,20 @@ export default defineConfig({
         '/api': {
           target: apiTarget,
           changeOrigin: true,
+          // Sin este handler http-proxy responde 500 con un cuerpo vacío y el
+          // cliente no puede distinguir "la API está caída" de un error interno.
+          configure(proxy) {
+            proxy.on('error', (error, _req, res) => {
+              if (!res || res.headersSent) return
+              res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' })
+              res.end(
+                JSON.stringify({
+                  error: 'API no disponible',
+                  message: `No se pudo contactar la API en ${apiTarget} (${error.code ?? error.message})`,
+                }),
+              )
+            })
+          },
         },
       },
     },

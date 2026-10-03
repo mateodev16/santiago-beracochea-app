@@ -24,6 +24,33 @@ export const clearToken = () => window.localStorage.removeItem(TOKEN_KEY)
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
+interface ErrorPayload {
+  message?: string
+  fields?: Record<string, string>
+}
+
+const errorFromResponse = async (response: Response): Promise<ApiError> => {
+  const raw = await response.text().catch(() => '')
+  let payload: ErrorPayload | null = null
+
+  try {
+    payload = raw ? (JSON.parse(raw) as ErrorPayload) : null
+  } catch {
+    payload = null
+  }
+
+  if (payload?.message) return new ApiError(response.status, payload.message, payload.fields)
+
+  // Sin JSON válido la respuesta no viene de la API: es el proxy de Vite sin
+  // backend detrás, así que el status 500 no era un error interno del server.
+  return new ApiError(
+    response.status,
+    response.status >= 500
+      ? 'La API no está disponible. ¿Está corriendo el backend? (npm run dev)'
+      : `Respuesta inesperada del servidor (${response.status})`,
+  )
+}
+
 async function request<T>(path: string, method: Method = 'GET', body?: unknown): Promise<T> {
   const token = getToken()
   const headers: Record<string, string> = {}
@@ -44,17 +71,9 @@ async function request<T>(path: string, method: Method = 'GET', body?: unknown):
 
   if (response.status === 204) return undefined as T
 
-  const payload = await response.json().catch(() => null)
+  if (!response.ok) throw await errorFromResponse(response)
 
-  if (!response.ok) {
-    throw new ApiError(
-      response.status,
-      payload?.message ?? 'Ocurrió un error inesperado',
-      payload?.fields,
-    )
-  }
-
-  return payload as T
+  return (await response.json()) as T
 }
 
 const qs = (params: Record<string, string | number | boolean | undefined>) => {
@@ -96,11 +115,9 @@ async function uploadFile(path: string, file: File): Promise<{ image: UploadedIm
     throw new ApiError(0, 'No pudimos subir la imagen. Revisá tu conexión.')
   }
 
-  const payload = await response.json().catch(() => null)
-  if (!response.ok) {
-    throw new ApiError(response.status, payload?.message ?? 'No pudimos subir la imagen')
-  }
-  return payload as { image: UploadedImage }
+  if (!response.ok) throw await errorFromResponse(response)
+
+  return (await response.json()) as { image: UploadedImage }
 }
 
 export const api = {

@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import AdminTabs from '../components/AdminTabs.astro'
+import AdminPanel from '../components/react/AdminPanel'
+---
+
+<BaseLayout title="Panel administrativo">
+  <section class="bg-sb-blue-deeper text-white">
+    <div class="mx-auto max-w-7xl px-6 py-14">
+      <nav class="text-xs text-white/60">
+        <a href="/" class="hover:text-white">Inicio</a>
+        <span class="mx-2">/</span>
+        <span class="font-semibold text-sb-gold">Panel administrativo</span>
+      </nav>
+      <h1 class="mt-4 font-display text-4xl font-bold lg:text-5xl">Panel administrativo</h1>
+      <p class="mt-3 max-w-2xl text-white/70">
+        Gestioná el catálogo de productos y seguí el estado de los pedidos de tus clientes.
+      </p>
+
+      <AdminTabs active="productos" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-12">
+    <AdminPanel view="productos" client:only="react" />
+  </section>
+</BaseLayout>

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "p-fleischmann",
+    "slug": "levadura-instantanea-fleischmann",
+    "name": "Levadura Instantánea",
+    "brand": "Fleischmann",
+    "category": "Panadería",
+    "description": "Levadura instantánea de 10g. Sin TACC, se agrega directo a la harina. Ideal para panes, tortas y pizzetas.",
+    "price": 45,
+    "unit": "10 g",
+    "image": "/images/products/fleischmann.png",
+    "badge": "Destacado",
+    "stock": 120
+  },
+  {
+    "id": "p-adria",
+    "slug": "macarrones-al-huevo-adria",
+    "name": "Macarrones al Huevo",
+    "brand": "Adria",
+    "category": "Pastas",
+    "description": "Macarrones de trigo con huevo, 500g. Industria uruguayo con textura firme y excelente agarre de salsa.",
+    "price": 138,
+    "unit": "500 g",
+    "image": "/images/products/adria.png",
+    "stock": 64
+  },
+  {
+    "id": "p-sucralight",
+    "slug": "endulzante-sucralight",
+    "name": "Endulzante Sucralight",
+    "brand": "Sucralight",
+    "category": "Dietética",
+    "description": "Endulzante en polvo cero calorías, 100 sobres. Ideal para café, mate y postres.",
+    "price": 210,
+    "unit": "100 sobres",
+    "image": "/images/products/sucralight.png",
+    "badge": "Nuevo",
+    "stock": 38
+  },
+  {
+    "id": "p-prix",
+    "slug": "detergente-prix-max",
+    "name": "Detergente Prix Max",
+    "brand": "Prix",
+    "category": "Limpieza",
+    "description": "Detergente lavavajilla concentrado x3 rendimiento, 500ml. Espuma activa y rinsing fácil.",
+    "price": 175,
+    "unit": "500 ml",
+    "image": "/images/products/prix.png",
+    "stock": 47
+  },
+  {
+    "id": "p-prime",
+    "slug": "ultra-finos-prime",
+    "name": "Ultra Finos x3",
+    "brand": "PRIME",
+    "category": "Salud",
+    "description": "Preservativos PRIME Ultra Finos de látex lubricados, 3 unidades. Envase discreto y confortable.",
+    "price": 320,
+    "unit": "x3",
+    "image": "/images/products/prime.png",
+    "badge": "Top ventas",
+    "stock": 80
+  },
+  {
+    "id": "p-azucar",
+    "slug": "azucar-bella-union-1kg",
+    "name": "Azúcar Bella Unión",
+    "brand": "ALUR",
+    "category": "Almacén",
+    "description": "Azúcar blanco refinado de 1kg. Grano fino de disolución rápida, ideal para el uso diario en casa y repostería.",
+    "price": 140,
+    "unit": "1 kg",
+    "image": "/images/products/bella-union.jpeg",
+    "badge": "Nuevo",
+    "stock": 60
+  }
+]

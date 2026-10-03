@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ProductCard from '../components/react/ProductCard'
+import BrandsSection from '../components/react/BrandsSection'
+import ContactForm from '../components/react/ContactForm'
+import { PRODUCTS } from '../data/products'
+
+const featured = PRODUCTS.filter((product) => product.badge).slice(0, 4)
+
+const benefits = [
+  {
+    title: 'Entrega en 24hs',
+    copy: 'Despachamos a todo el país con seguimiento en tiempo real.',
+  },
+  {
+    title: 'Precios mayoristas',
+    copy: 'Tarifas diferenciadas para comercios que compran en volumen.',
+  },
+  {
+    title: 'Catálogo siempre actualizado',
+    copy: 'Stock real disponible y avisos cuando llegan productos nuevos.',
+  },
+]
+---
+
+<BaseLayout title="Inicio">
+  <section class="bg-gradient-to-br from-sb-blue-deeper to-sb-blue text-white">
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28"
+    >
+      <div class="animate-fade-up">
+        <p class="text-xs font-bold tracking-[0.25em] text-sb-gold uppercase">
+          Distribuidora mayorista · Uruguay
+        </p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.05] font-bold lg:text-6xl">
+          Todo lo que tu negocio necesita, en un solo pedido
+        </h1>
+        <p class="mt-6 max-w-lg text-lg text-white/80">
+          Alimentos, limpieza y cuidado personal con precio mayorista, stock real y entrega en
+          24 horas.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a
+            href="/catalogo"
+            class="rounded-xl bg-sb-gold px-7 py-3.5 text-sm font-bold text-sb-blue-deeper transition hover:bg-sb-gold-light"
+          >
+            Ver catálogo
+          </a>
+          <a
+            href="/registro"
+            class="rounded-xl border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            Crear cuenta
+          </a>
+        </div>
+        <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-white/15 pt-8">
+          <div>
+            <dt class="font-display text-3xl font-bold">+15</dt>
+            <dd class="text-xs text-white/70">años en el mercado</dd>
+          </div>
+          <div>
+            <dt class="font-display text-3xl font-bold">800+</dt>
+            <dd class="text-xs text-white/70">productos activos</dd>
+          </div>
+          <div>
+            <dt class="font-display text-3xl font-bold">24hs</dt>
+            <dd class="text-xs text-white/70">de entrega</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="animate-fade-in flex justify-center">
+        <img
+          src="/images/hero.png"
+          alt="Camión de distribución Santiago Beracochea"
+          class="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl"
+        />
+      </div>
+    </div>
+  </section>
+
+  <BrandsSection client:load />
+
+  <section class="bg-sb-cream">
+    <div class="mx-auto max-w-7xl px-6 py-20">
+      <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold tracking-[0.2em] text-sb-blue uppercase">Destacados</p>
+          <h2 class="mt-3 font-display text-3xl font-bold text-sb-blue-deeper">
+            Productos de la semana
+          </h2>
+        </div>
+        <a
+          href="/catalogo"
+          class="rounded-xl border border-sb-blue px-5 py-2.5 text-sm font-semibold text-sb-blue transition hover:bg-sb-blue hover:text-white"
+        >
+          Ver todos
+        </a>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          featured.map((product) => (
+            <ProductCard product={product} client:visible />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-20">
+    <div class="mb-10 text-center">
+      <p class="text-xs font-bold tracking-[0.2em] text-sb-blue uppercase">Por qué SBI</p>
+      <h2 class="mt-3 font-display text-3xl font-bold text-sb-blue-deeper">
+        Comprar con nosotros es simple
+      </h2>
+    </div>
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        benefits.map((benefit, index) => (
+          <div class="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+            <span class="grid h-11 w-11 place-items-center rounded-xl bg-sb-blue/10 font-display text-lg font-bold text-sb-blue">
+              {index + 1}
+            </span>
+            <h3 class="mt-5 font-display text-lg font-bold text-sb-blue-deeper">
+              {benefit.title}
+            </h3>
+            <p class="mt-2 text-sm text-sb-muted">{benefit.copy}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <ContactForm client:load />
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import NavLinks from './react/NavLinks'
+---
+
+<header class="sticky top-0 z-40 border-b border-white/10 bg-sb-blue-dark">
+  <div class="mx-auto flex max-w-7xl items-center gap-6 px-6 py-4">
+    <a href="/" class="flex shrink-0 items-center gap-3">
+      <img src="/images/logo.png" alt="Santiago Beracochea" class="h-11 w-11 rounded-xl" />
+      <span class="hidden xl:block">
+        <span class="block font-display text-base leading-tight font-bold text-white">
+          Santiago Beracochea
+        </span>
+        <span class="block text-[10px] font-semibold tracking-[0.2em] text-sb-gold uppercase">
+          Distribuidora
+        </span>
+      </span>
+    </a>
+
+    <NavLinks variant="desktop" client:load />
+
+    <div class="ml-auto">
+      <slot name="controls" />
+    </div>
+  </div>
+
+  <NavLinks variant="mobile" client:load />
+</header>

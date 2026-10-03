@@ -1,0 +1,532 @@
+{
+  "users": [
+    {
+      "id": "717d2869-6089-4c10-876a-58f01edca9ea",
+      "name": "Administrador",
+      "email": "admin@sb.com.uy",
+      "passwordHash": "$2b$10$gdOcr7gw.LdhS4yR097Qv.tlZar7RVQPz9ORnmRt3vIQrYhC3Ccby",
+      "role": "admin",
+      "phone": "099 123 456",
+      "address": "Av. Brasil 1234",
+      "city": "Montevideo",
+      "createdAt": "2026-09-30T23:53:11.245Z"
+    },
+    {
+      "id": "edcebd0d-328e-4189-8a5e-deae59888697",
+      "name": "Ana Perez",
+      "email": "ana@test.uy",
+      "passwordHash": "$2b$10$jZiiWPgjVnxoQGb8E77GO.ycG50gI1NhkpcVpMQxE5QOYhgc8yxum",
+      "role": "user",
+      "phone": "099111",
+      "city": "Montevideo",
+      "address": "18 de Julio 1000",
+      "createdAt": "2026-09-30T23:53:30.012Z"
+    },
+    {
+      "id": "4418ae1b-d074-42e7-92d4-e8ea3912dd15",
+      "name": "La franja",
+      "email": "asd@gmail.com",
+      "passwordHash": "$2b$10$wtidkOUk.qQZa42iX2hntO5yZS8kYrofECSsTJ3aZZQ/NcWp57h8C",
+      "role": "user",
+      "phone": "099123123",
+      "city": "Minas",
+      "address": "",
+      "createdAt": "2026-10-01T00:47:14.737Z"
+    },
+    {
+      "id": "6d1c7d62-2471-4046-8824-67c659216bbe",
+      "name": "La franja",
+      "email": "asda@gmail.com",
+      "passwordHash": "$2b$10$xTN.tWRsyn87EgjltPY20Oys3/ABTsYwMukZsZsmUTN8ChqV.suKq",
+      "role": "user",
+      "phone": "123123123",
+      "city": "Minas",
+      "address": "",
+      "createdAt": "2026-10-01T00:48:17.487Z"
+    },
+    {
+      "id": "7f8ed250-c719-4114-9941-61c54115348e",
+      "name": "La franja",
+      "email": "mateogo1627@gmail.com",
+      "passwordHash": "$2b$10$SOLvOXUUmjeWTuHpd3q0HuybopDCjAQpxX2uE.xns10pYT1UX/qU6",
+      "role": "user",
+      "phone": "09923123",
+      "city": "Minas",
+      "address": "",
+      "createdAt": "2026-10-01T00:48:51.394Z"
+    },
+    {
+      "id": "535035fb-6437-4215-b3ad-fec922fb8681",
+      "name": "La franja",
+      "email": "asd1@gmail.com",
+      "passwordHash": "$2b$10$.Gd.KRlUEc09M2KKSPXHLOBEn2IdinCBqO7nIhiVMUyErBYA/0u9a",
+      "role": "user",
+      "phone": "",
+      "city": "",
+      "address": "",
+      "createdAt": "2026-10-01T00:49:44.001Z"
+    },
+    {
+      "id": "edc0d224-8c87-4d97-8c06-95f12223482f",
+      "name": "Maria Gomez Fernandez",
+      "email": "cliente461211152@test.uy",
+      "passwordHash": "$2b$10$gpBubnea5jRJkr.CqS0eMu6sCrPt9TYbiNTHXIfbXLPdKtBz9kufq",
+      "role": "user",
+      "phone": "099555",
+      "city": "Montevideo",
+      "address": "",
+      "createdAt": "2026-10-01T01:01:14.184Z"
+    },
+    {
+      "id": "723e62b4-6d9c-4e2b-9b5e-b57f3d73a7fb",
+      "name": "Lo de niver",
+      "email": "mateo@gmail.com",
+      "passwordHash": "$2b$10$Vq7w37juSHxE00i4KKtnIOoSsY8YGltzHZg4kgfcIS5ZRoVMbgXKa",
+      "role": "user",
+      "phone": "099123123",
+      "city": "Minas",
+      "address": "",
+      "createdAt": "2026-10-01T01:28:43.343Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "p-fleischmann",
+      "slug": "levadura-instantanea-fleischmann",
+      "name": "Levadura Instantánea",
+      "brand": "Fleischmann",
+      "category": "Panadería",
+      "description": "Levadura instantánea de 10g. Sin TACC, se agrega directo a la harina. Ideal para panes, tortas y pizzetas.",
+      "price": 45,
+      "unit": "10 g",
+      "image": "/images/products/fleischmann.png",
+      "badge": "Destacado",
+      "stock": 105,
+      "active": true,
+      "createdAt": "2026-09-30T23:53:11.245Z",
+      "updatedAt": "2026-10-01T01:05:41.940Z"
+    },
+    {
+      "id": "p-adria",
+      "slug": "macarrones-al-huevo-adria",
+      "name": "Macarrones al Huevo",
+      "brand": "Adria",
+      "category": "Pastas",
+      "description": "Macarrones de trigo con huevo, 500g. Industria uruguayo con textura firme y excelente agarre de salsa.",
+      "price": 138,
+      "unit": "500 g",
+      "image": "/images/products/adria.png",
+      "stock": 57,
+      "active": true,
+      "createdAt": "2026-09-30T23:53:11.245Z",
+      "updatedAt": "2026-10-01T01:05:41.940Z"
+    },
+    {
+      "id": "p-sucralight",
+      "slug": "endulzante-sucralight",
+      "name": "Endulzante Sucralight",
+      "brand": "Sucralight",
+      "category": "Dietética",
+      "description": "Endulzante en polvo cero calorías, 100 sobres. Ideal para café, mate y postres.",
+      "price": 210,
+      "unit": "100 sobres",
+      "image": "/images/products/sucralight.png",
+      "badge": "Nuevo",
+      "stock": 35,
+      "active": true,
+      "createdAt": "2026-09-30T23:53:11.245Z",
+      "updatedAt": "2026-10-01T01:05:41.940Z"
+    },
+    {
+      "id": "p-prix",
+      "slug": "detergente-prix-max",
+      "name": "Detergente Prix Max",
+      "brand": "Prix",
+      "category": "Limpieza",
+      "description": "Detergente lavavajilla concentrado x3 rendimiento, 500ml. Espuma activa y rinsing fácil.",
+      "price": 175,
+      "unit": "500 ml",
+      "image": "/images/products/prix.png",
+      "stock": 43,
+      "active": true,
+      "createdAt": "2026-09-30T23:53:11.245Z",
+      "updatedAt": "2026-10-01T01:05:41.940Z"
+    },
+    {
+      "id": "p-prime",
+      "slug": "ultra-finos-prime",
+      "name": "Ultra Finos x3",
+      "brand": "PRIME",
+      "category": "Salud",
+      "description": "Preservativos PRIME Ultra Finos de látex lubricados, 3 unidades. Envase discreto y confortable.",
+      "price": 320,
+      "unit": "x3",
+      "image": "/images/products/prime.png",
+      "badge": "Top ventas",
+      "stock": 73,
+      "active": true,
+      "createdAt": "2026-09-30T23:53:11.245Z",
+      "updatedAt": "2026-10-01T01:05:41.940Z"
+    },
+    {
+      "id": "p-azucar",
+      "slug": "azucar-bella-union-1kg",
+      "name": "Azúcar Bella Unión",
+      "brand": "ALUR",
+      "category": "Almacén",
+      "description": "Azúcar blanco refinado de 1kg. Grano fino de disolución rápida, ideal para el uso diario en casa y repostería.",
+      "price": 140,
+      "unit": "1 kg",
+      "image": "/images/products/bella-union.jpeg",
+      "badge": "Nuevo",
+      "stock": 60,
+      "active": true,
+      "createdAt": "2026-09-30T23:53:11.245Z",
+      "updatedAt": "2026-10-01T01:05:41.940Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "3700a3d5-786a-4016-b607-beea5f3f5ad7",
+      "code": "SB-6626",
+      "userId": "535035fb-6437-4215-b3ad-fec922fb8681",
+      "userName": "La franja",
+      "userEmail": "asd1@gmail.com",
+      "items": [
+        {
+          "productId": "p-fleischmann",
+          "slug": "levadura-instantanea-fleischmann",
+          "name": "Levadura Instantánea",
+          "brand": "Fleischmann",
+          "image": "/images/products/fleischmann.png",
+          "price": 45,
+          "qty": 10
+        },
+        {
+          "productId": "p-sucralight",
+          "slug": "endulzante-sucralight",
+          "name": "Endulzante Sucralight",
+          "brand": "Sucralight",
+          "image": "/images/products/sucralight.png",
+          "price": 210,
+          "qty": 1
+        },
+        {
+          "productId": "p-prime",
+          "slug": "ultra-finos-prime",
+          "name": "Ultra Finos x3",
+          "brand": "PRIME",
+          "image": "/images/products/prime.png",
+          "price": 320,
+          "qty": 1
+        },
+        {
+          "productId": "p-prix",
+          "slug": "detergente-prix-max",
+          "name": "Detergente Prix Max",
+          "brand": "Prix",
+          "image": "/images/products/prix.png",
+          "price": 175,
+          "qty": 1
+        },
+        {
+          "productId": "p-adria",
+          "slug": "macarrones-al-huevo-adria",
+          "name": "Macarrones al Huevo",
+          "brand": "Adria",
+          "image": "/images/products/adria.png",
+          "price": 138,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "cafe-molido-natural-1kg",
+          "name": "Café Molido Natural",
+          "brand": "Las Marías",
+          "image": "/images/products/adria.png",
+          "price": 690,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "aceite-girasol-900ml",
+          "name": "Aceite de Girasol",
+          "brand": "Oléico",
+          "image": "/images/products/sucralight.png",
+          "price": 195,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "arroz-grano-largo-5kg",
+          "name": "Arroz Grano Largo",
+          "brand": "Anaconda",
+          "image": "/images/products/prix.png",
+          "price": 430,
+          "qty": 1
+        }
+      ],
+      "subtotal": 2608,
+      "shipping": 0,
+      "total": 2608,
+      "status": "confirmado",
+      "date": "30/9/2026",
+      "createdAt": "2026-10-01T01:05:41.940Z",
+      "address": "Guernica 586, Minas",
+      "notes": "dejar en la puerta",
+      "paymentMethod": "efectivo",
+      "updatedAt": "2026-10-01T01:21:10.985Z"
+    },
+    {
+      "id": "ed649e81-768c-49bd-b1e0-3aa96fcb4bc3",
+      "code": "SB-7685",
+      "userId": "edc0d224-8c87-4d97-8c06-95f12223482f",
+      "userName": "Maria Gomez Fernandez",
+      "userEmail": "cliente461211152@test.uy",
+      "items": [
+        {
+          "productId": "p-adria",
+          "slug": "macarrones-al-huevo-adria",
+          "name": "Macarrones al Huevo",
+          "brand": "Adria",
+          "image": "/images/products/adria.png",
+          "price": 138,
+          "qty": 4
+        },
+        {
+          "productId": null,
+          "slug": "cafe-molido-natural-1kg",
+          "name": "Café Molido Natural",
+          "brand": "Las Marías",
+          "image": "/images/products/adria.png",
+          "price": 690,
+          "qty": 1
+        }
+      ],
+      "subtotal": 1242,
+      "shipping": 0,
+      "total": 1242,
+      "status": "entregado",
+      "date": "30/9/2026",
+      "createdAt": "2026-10-01T01:01:14.297Z",
+      "address": "Av. Italia 2000, Montevideo",
+      "notes": "Entregar antes de las 12",
+      "paymentMethod": "credito",
+      "updatedAt": "2026-10-01T01:20:54.587Z"
+    },
+    {
+      "id": "089f2f26-d40f-4c2c-ba2d-f9db1ff02a15",
+      "code": "SB-2019",
+      "userId": "535035fb-6437-4215-b3ad-fec922fb8681",
+      "userName": "La franja",
+      "userEmail": "asd1@gmail.com",
+      "items": [
+        {
+          "productId": "p-prime",
+          "slug": "ultra-finos-prime",
+          "name": "Ultra Finos x3",
+          "brand": "PRIME",
+          "image": "/images/products/prime.png",
+          "price": 320,
+          "qty": 1
+        },
+        {
+          "productId": "p-sucralight",
+          "slug": "endulzante-sucralight",
+          "name": "Endulzante Sucralight",
+          "brand": "Sucralight",
+          "image": "/images/products/sucralight.png",
+          "price": 210,
+          "qty": 1
+        },
+        {
+          "productId": "p-fleischmann",
+          "slug": "levadura-instantanea-fleischmann",
+          "name": "Levadura Instantánea",
+          "brand": "Fleischmann",
+          "image": "/images/products/fleischmann.png",
+          "price": 45,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "cafe-molido-natural-1kg",
+          "name": "Café Molido Natural",
+          "brand": "Las Marías",
+          "image": "/images/products/adria.png",
+          "price": 690,
+          "qty": 4
+        },
+        {
+          "productId": "p-adria",
+          "slug": "macarrones-al-huevo-adria",
+          "name": "Macarrones al Huevo",
+          "brand": "Adria",
+          "image": "/images/products/adria.png",
+          "price": 138,
+          "qty": 1
+        },
+        {
+          "productId": "p-prix",
+          "slug": "detergente-prix-max",
+          "name": "Detergente Prix Max",
+          "brand": "Prix",
+          "image": "/images/products/prix.png",
+          "price": 175,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "aceite-girasol-900ml",
+          "name": "Aceite de Girasol",
+          "brand": "Oléico",
+          "image": "/images/products/sucralight.png",
+          "price": 195,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "arroz-grano-largo-5kg",
+          "name": "Arroz Grano Largo",
+          "brand": "Anaconda",
+          "image": "/images/products/prix.png",
+          "price": 430,
+          "qty": 1
+        }
+      ],
+      "subtotal": 4273,
+      "shipping": 0,
+      "total": 4273,
+      "status": "confirmado",
+      "date": "30/9/2026",
+      "createdAt": "2026-10-01T00:56:58.650Z",
+      "address": "Guernica 586, Minas",
+      "notes": "dejar en la puerta",
+      "paymentMethod": "credito",
+      "updatedAt": "2026-10-01T01:21:13.351Z"
+    },
+    {
+      "id": "bf11f322-a5a9-4f2c-865d-e33ef5cf9a97",
+      "code": "SB-7798",
+      "userId": "535035fb-6437-4215-b3ad-fec922fb8681",
+      "userName": "La franja",
+      "userEmail": "asd1@gmail.com",
+      "items": [
+        {
+          "productId": "p-prix",
+          "slug": "detergente-prix-max",
+          "name": "Detergente Prix Max",
+          "brand": "Prix",
+          "image": "/images/products/prix.png",
+          "price": 175,
+          "qty": 2
+        },
+        {
+          "productId": "p-sucralight",
+          "slug": "endulzante-sucralight",
+          "name": "Endulzante Sucralight",
+          "brand": "Sucralight",
+          "image": "/images/products/sucralight.png",
+          "price": 210,
+          "qty": 1
+        },
+        {
+          "productId": "p-fleischmann",
+          "slug": "levadura-instantanea-fleischmann",
+          "name": "Levadura Instantánea",
+          "brand": "Fleischmann",
+          "image": "/images/products/fleischmann.png",
+          "price": 45,
+          "qty": 1
+        },
+        {
+          "productId": "p-prime",
+          "slug": "ultra-finos-prime",
+          "name": "Ultra Finos x3",
+          "brand": "PRIME",
+          "image": "/images/products/prime.png",
+          "price": 320,
+          "qty": 5
+        },
+        {
+          "productId": "p-adria",
+          "slug": "macarrones-al-huevo-adria",
+          "name": "Macarrones al Huevo",
+          "brand": "Adria",
+          "image": "/images/products/adria.png",
+          "price": 138,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "cafe-molido-natural-1kg",
+          "name": "Café Molido Natural",
+          "brand": "Las Marías",
+          "image": "/images/products/adria.png",
+          "price": 690,
+          "qty": 1
+        },
+        {
+          "productId": null,
+          "slug": "aceite-girasol-900ml",
+          "name": "Aceite de Girasol",
+          "brand": "Oléico",
+          "image": "/images/products/sucralight.png",
+          "price": 195,
+          "qty": 1
+        }
+      ],
+      "subtotal": 3228,
+      "shipping": 0,
+      "total": 3228,
+      "status": "entregado",
+      "date": "30/9/2026",
+      "createdAt": "2026-10-01T00:55:40.645Z",
+      "address": "Guernica 586, Minas",
+      "notes": "Dejar en la puerta",
+      "paymentMethod": "credito",
+      "updatedAt": "2026-10-01T01:21:08.454Z"
+    },
+    {
+      "id": "62051e82-7ba6-4b0b-ab7a-0bc3cf380301",
+      "code": "SB-4531",
+      "userId": "edcebd0d-328e-4189-8a5e-deae59888697",
+      "userName": "Ana Perez",
+      "userEmail": "ana@test.uy",
+      "items": [
+        {
+          "productId": "p-fleischmann",
+          "slug": "levadura-instantanea-fleischmann",
+          "name": "Levadura Instantánea",
+          "brand": "Fleischmann",
+          "image": "/images/products/fleischmann.png",
+          "price": 45,
+          "qty": 3
+        },
+        {
+          "productId": "90741e4c-4a78-4bc4-a58d-c7a5952b9352",
+          "slug": "jabon-en-polvo",
+          "name": "Jabon en Polvo",
+          "brand": "Skip",
+          "image": "/images/products/prix.png",
+          "price": 280,
+          "qty": 2
+        }
+      ],
+      "subtotal": 695,
+      "shipping": 150,
+      "total": 845,
+      "status": "entregado",
+      "date": "30/9/2026",
+      "createdAt": "2026-09-30T23:53:30.083Z",
+      "address": "18 de Julio 1000, Montevideo",
+      "notes": "Tocar timbre",
+      "paymentMethod": "transferencia",
+      "updatedAt": "2026-10-01T01:21:02.669Z"
+    }
+  ],
+  "meta": {
+    "version": 1,
+    "seededAt": "2026-09-30T23:53:11.245Z"
+  }
+}

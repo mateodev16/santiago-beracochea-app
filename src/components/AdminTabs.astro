@@ -1,0 +1,32 @@
+---
+interface Props {
+  active: 'productos' | 'pedidos' | 'metricas'
+}
+
+const { active } = Astro.props
+
+const tabs = [
+  { view: 'productos' as const, label: 'Productos', href: '/admin' },
+  { view: 'pedidos' as const, label: 'Pedidos de clientes', href: '/admin/pedidos' },
+  { view: 'metricas' as const, label: 'Métricas', href: '/admin/metricas' },
+]
+---
+
+<div class="mt-8 flex flex-wrap gap-2">
+  {
+    tabs.map((tab) => (
+      <a
+        href={tab.href}
+        aria-current={active === tab.view ? 'page' : undefined}
+        class:list={[
+          'rounded-xl px-5 py-2.5 text-sm font-semibold transition',
+          active === tab.view
+            ? 'bg-sb-gold text-sb-blue-deeper'
+            : 'border border-white/25 text-white hover:bg-white/10',
+        ]}
+      >
+        {tab.label}
+      </a>
+    ))
+  }
+</div>

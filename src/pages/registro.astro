@@ -1,0 +1,8 @@
+---
+import AuthLayout from '../layouts/AuthLayout.astro'
+import AuthPanel from '../components/react/AuthPanel'
+---
+
+<AuthLayout title="Crear cuenta">
+  <AuthPanel mode="register" client:load />
+</AuthLayout>

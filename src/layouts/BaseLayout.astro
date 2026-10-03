@@ -1,0 +1,46 @@
+---
+import '../styles/global.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import HeaderControls from '../components/react/HeaderControls'
+import StoreHydrator from '../components/react/StoreHydrator'
+import AuthGuard from '../components/react/AuthGuard'
+
+interface Props {
+  title: string
+  description?: string
+  hideChrome?: boolean
+}
+
+const {
+  title,
+  description = 'Distribuidora mayorista de alimentos, limpieza y cuidado personal. Santiago Beracochea.',
+  hideChrome = false,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <meta name="description" content={description} />
+    <title>{title} · Santiago Beracochea</title>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <StoreHydrator client:load />
+    {
+      !hideChrome && (
+        <Header>
+          <HeaderControls slot="controls" client:load />
+        </Header>
+      )
+    }
+    <main class="flex-1">
+      <AuthGuard client:load />
+      <slot />
+    </main>
+    {!hideChrome && <Footer />}
+  </body>
+</html>

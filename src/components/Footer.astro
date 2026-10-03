@@ -1,0 +1,50 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="mt-20 bg-sb-blue-deeper text-white/80">
+  <div class="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-3">
+        <img src="/images/logo.png" alt="Santiago Beracochea" class="h-12 w-12 rounded-xl" />
+        <div>
+          <p class="font-display text-lg font-bold text-white">Santiago Beracochea</p>
+          <p class="text-[10px] font-semibold tracking-[0.2em] text-sb-gold uppercase">
+            Distribuidora
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-sm leading-relaxed">
+        Distribución mayorista de alimentos, limpieza y cuidado personal para comercios y
+        hogares en todo el país.
+      </p>
+    </div>
+
+    <div>
+      <p class="font-display text-sm font-bold tracking-wide text-white uppercase">Navegación</p>
+      <ul class="mt-4 flex flex-col gap-2 text-sm">
+        <li><a href="/" class="transition hover:text-sb-gold">Inicio</a></li>
+        <li><a href="/catalogo" class="transition hover:text-sb-gold">Catálogo</a></li>
+        <li><a href="/checkout" class="transition hover:text-sb-gold">Checkout</a></li>
+        <li><a href="/pedidos" class="transition hover:text-sb-gold">Mis pedidos</a></li>
+        <li><a href="/perfil" class="transition hover:text-sb-gold">Perfil</a></li>
+        <li><a href="/admin" class="transition hover:text-sb-gold">Panel administrativo</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-display text-sm font-bold tracking-wide text-white uppercase">Contacto</p>
+      <ul class="mt-4 flex flex-col gap-2 text-sm">
+        <li>Ituzaingo 668, Minas</li>
+        <li>Tel: 444 22968</li>
+        <li>ventas@sb.com.uy</li>
+        <li class="mt-2">Lunes a viernes 8:00 – 13:00 y 14:30 – 18:30</li>
+        <li>Sábados 8:00 – 13:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10 py-5 text-center text-xs">
+    © {year} Santiago Beracochea Distribuidora · Todos los derechos reservados · Desarrollado por <a href="https://www.linkedin.com/in/mateo-go%C3%B1i-10ab54294/?isSelfProfile=true" class="transition hover:text-sb-gold"> Mateo Goñi</a>
+  </div>
+</footer>

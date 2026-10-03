@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import AdminTabs from '../../components/AdminTabs.astro'
+import AdminPanel from '../../components/react/AdminPanel'
+---
+
+<BaseLayout title="Métricas · Panel administrativo">
+  <section class="bg-sb-blue-deeper text-white">
+    <div class="mx-auto max-w-7xl px-6 py-14">
+      <nav class="text-xs text-white/60">
+        <a href="/" class="hover:text-white">Inicio</a>
+        <span class="mx-2">/</span>
+        <a href="/admin" class="hover:text-white">Panel administrativo</a>
+        <span class="mx-2">/</span>
+        <span class="font-semibold text-sb-gold">Métricas</span>
+      </nav>
+      <h1 class="mt-4 font-display text-4xl font-bold lg:text-5xl">Métricas</h1>
+      <p class="mt-3 max-w-2xl text-white/70">
+        Ventas, clientes, productos más vendidos y alertas de stock, calculadas directo con
+        consultas SQL sobre PostgreSQL.
+      </p>
+
+      <AdminTabs active="metricas" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-6 py-12">
+    <AdminPanel view="metricas" client:only="react" />
+  </section>
+</BaseLayout>

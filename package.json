@@ -7,7 +7,7 @@
     "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
     "dev:web": "astro dev",
     "dev:api": "node --env-file=.env --watch server/index.js",
-    "start": "node --env-file=.env server/index.js",
+"start": "node server/index.js",
     "build": "astro build",
     "preview": "node --env-file=.env server/index.js",
     "check": "astro check",

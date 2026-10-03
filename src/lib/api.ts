@@ -1,4 +1,8 @@
-const BASE = import.meta.env.PUBLIC_API_URL ?? '/api'
+// `PUBLIC_API_URL` es el origen de la API (sin `/api`), mismo criterio que
+// `server/utils/images.js`. Aceptamos también el valor con `/api` para no
+// duplicar el prefijo: sin esto, `POST /auth/register` daba 404 en el deploy.
+const apiOrigin = (import.meta.env.PUBLIC_API_URL ?? '').replace(/\/+$/, '')
+const BASE = apiOrigin === '' ? '/api' : apiOrigin.endsWith('/api') ? apiOrigin : `${apiOrigin}/api`
 const TOKEN_KEY = 'sb_token'
 
 export class ApiError extends Error {
@@ -29,7 +33,7 @@ interface ErrorPayload {
   fields?: Record<string, string>
 }
 
-const errorFromResponse = async (response: Response): Promise<ApiError> => {
+const errorFromResponse = async (response: Response, url: string): Promise<ApiError> => {
   const raw = await response.text().catch(() => '')
   let payload: ErrorPayload | null = null
 
@@ -41,13 +45,15 @@ const errorFromResponse = async (response: Response): Promise<ApiError> => {
 
   if (payload?.message) return new ApiError(response.status, payload.message, payload.fields)
 
-  // Sin JSON válido la respuesta no viene de la API: es el proxy de Vite sin
-  // backend detrás, así que el status 500 no era un error interno del server.
+  // Sin JSON válido la respuesta no viene de la API: contesta el host que sirve
+  // la página (o el proxy de Vite sin backend detrás). Va la URL y el
+  // Content-Type porque separan "no hay API en este origen" de "ruta equivocada".
+  const contentType = response.headers.get('content-type') ?? 'sin content-type'
   return new ApiError(
     response.status,
     response.status >= 500
-      ? 'La API no está disponible. ¿Está corriendo el backend? (npm run dev)'
-      : `Respuesta inesperada del servidor (${response.status})`,
+      ? `La API no está disponible (${response.status}) en ${url} [${contentType}]. ¿Está corriendo el backend? (npm run dev)`
+      : `Respuesta inesperada del servidor (${response.status}) en ${url} [${contentType}]`,
   )
 }
 
@@ -71,7 +77,7 @@ async function request<T>(path: string, method: Method = 'GET', body?: unknown):
 
   if (response.status === 204) return undefined as T
 
-  if (!response.ok) throw await errorFromResponse(response)
+  if (!response.ok) throw await errorFromResponse(response, `${BASE}${path}`)
 
   return (await response.json()) as T
 }
@@ -115,7 +121,7 @@ async function uploadFile(path: string, file: File): Promise<{ image: UploadedIm
     throw new ApiError(0, 'No pudimos subir la imagen. Revisá tu conexión.')
   }
 
-  if (!response.ok) throw await errorFromResponse(response)
+  if (!response.ok) throw await errorFromResponse(response, `${BASE}${path}`)
 
   return (await response.json()) as { image: UploadedImage }
 }

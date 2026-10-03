@@ -28,8 +28,10 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 
 export const isImageId = (value) => UUID_RE.test(String(value ?? ''))
 
-// Las <img> no mandan el bearer token, por eso la URL tiene que ser absoluta
+// Las <img> no mandan el bearer token, así que la URL tiene que ser absoluta
 // cuando la API vive en otro origen que el sitio.
 export const imagePath = (id) => `/api/images/${id}`
 
-export const imageUrl = (id) => `${config.publicApiUrl}${imagePath(id)}`
+// `PUBLIC_API_URL` es el origen de la API, sin `/api`; lo toleramos con y sin
+// el prefijo para que no quede `/api/api/images/...`.
+export const imageUrl = (id) => `${config.publicApiUrl.replace(/\/api$/, '')}${imagePath(id)}`

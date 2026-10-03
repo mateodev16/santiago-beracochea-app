@@ -42,7 +42,9 @@ The MIME check is done on the **magic bytes** (`server/utils/images.js`), not th
 
 Images uploaded by an admin cannot live in `public/`: the Astro build is static, so that folder is baked into `dist/` at build time and any runtime write is lost on the next deploy.
 
-Set `PUBLIC_API_URL` in production when the API does not share an origin with the site. It is read by both `src/lib/api.ts` and `server/config.js`, so the stored URL is absolute and `<img src>` resolves.
+Set `PUBLIC_API_URL` in production when the API does not share an origin with the site. It is the **API origin** (`https://sb-api.onrender.com`, no `/api` suffix) and is read by both `src/lib/api.ts` and `server/config.js`, so the stored URL is absolute and `<img src>` resolves. A trailing `/api` is tolerated by both readers and never duplicated.
+
+It is inlined into the client bundle at **build** time, so on a static deploy it has to be set on the build, not just at runtime. Missing it leaves `BASE = '/api'`, which 404s against a static host instead of reaching the API.
 
 ## Routes
 
